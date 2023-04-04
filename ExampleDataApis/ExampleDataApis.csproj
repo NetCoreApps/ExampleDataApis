@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="ExampleDataApis" />
+    <Using Include="ServiceStack" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App_Data" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack" Version="6.*" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="6.*" />
+    <PackageReference Include="ServiceStack.Server" Version="6.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExampleDataApis.ServiceInterface\ExampleDataApis.ServiceInterface.csproj" />
+    <ProjectReference Include="..\ExampleDataApis.ServiceModel\ExampleDataApis.ServiceModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="static_data\xkcd-metadata.jsonl" />
+    <Content Include="static_data\xkcd-metadata.jsonl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
