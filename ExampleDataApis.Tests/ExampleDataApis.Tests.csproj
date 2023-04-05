@@ -17,4 +17,11 @@
     <PackageReference Include="ServiceStack.Kestrel" Version="6.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="xkcd-metadata.jsonl" />
+    <Content Include="xkcd-metadata.jsonl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
