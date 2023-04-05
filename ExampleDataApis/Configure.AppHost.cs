@@ -27,7 +27,7 @@ public class AppHost : AppHostBase, IHostingStartup
             "http://localhost:5173", //vite dev
             "http://localhost:5000", //dotnet dev
             "https://localhost:5001", //dotnet dev
-            "https://xkcd-autoquery.netcore.io"
+            "https://xkcd.netcore.io"
         }, allowCredentials:true));
     }
 }
