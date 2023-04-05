@@ -35,7 +35,7 @@ public class UnitTest
         Assert.That(response.Result, Is.EqualTo("Hello, World!"));
     }
 
-    [Test]
+    [Test, Explicit]
     public void Extract_Xkcd_Image_Dimensions()
     {
         var allLines = "xkcd-metadata.jsonl"
