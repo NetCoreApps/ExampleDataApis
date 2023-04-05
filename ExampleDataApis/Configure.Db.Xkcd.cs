@@ -20,6 +20,16 @@ public static class ConfigureDbXkcd
             .Where(x => !x.IsNullOrEmpty())
             .Select(JsonSerializer.DeserializeFromString<XkcdComic>)
             .ToList();
+
+        var dimensions = "static_data/xkcd-dimensions.jsonl"
+            .ReadAllText().FromJson<List<XkcdComic>>();
+
+        foreach (var comic in comics)
+        {
+            var dimension = dimensions.First(x => x.Id == comic.Id);
+            comic.Width = dimension.Width;
+            comic.Height = dimension.Height;
+        }
         
         if(db.CreateTableIfNotExists<XkcdComic>())
             db.InsertAll(comics);

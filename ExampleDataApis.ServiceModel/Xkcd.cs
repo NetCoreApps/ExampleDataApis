@@ -18,4 +18,7 @@ public class XkcdComic
     public string ExplainedUrl { get; set; }
     public string Transcript { get; set; }
     public string Explanation { get; set; }
+    
+    public int Width { get; set; }
+    public int Height { get; set; }
 }
