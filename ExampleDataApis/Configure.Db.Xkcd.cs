@@ -21,7 +21,7 @@ public static class ConfigureDbXkcd
             .Select(JsonSerializer.DeserializeFromString<XkcdComic>)
             .ToList();
 
-        var dimensions = "static_data/xkcd-dimensions.jsonl"
+        var dimensions = "static_data/xkcd-dimensions.json"
             .ReadAllText().FromJson<List<XkcdComic>>();
 
         foreach (var comic in comics)
