@@ -49,39 +49,36 @@ public class UnitTest
             .Where(x => !x.IsNullOrEmpty())
             .Select(JsonSerializer.DeserializeFromString<XkcdComic>)
             .ToList();
+        
+        var existingDimensions = "xkcd-dimensions.json"
+            .ReadAllText().FromJson<List<XkcdComicDimensions>>();
 
-        var results = new List<XkcdComicDimensions>();
-        foreach (var comic in comics)
+        var updatedDimensions = "xkcd-dimensions_updated.json"
+            .ReadAllText().FromJson<List<XkcdComicDimensions>>();
+        
+        for (var index = 0; index < existingDimensions.Count; index++)
         {
-            try
+            var existingDimension = existingDimensions[index];
+            if(existingDimension?.Width != 0)
+                continue;
+            var comic = comics.FirstOrDefault(x => x.Id == existingDimension.Id);
+            if (comic == null || comic.ImageUrl.IsNullOrEmpty())
             {
-                var image = comic.ImageUrl.GetBytesFromUrl();
-                using var imageStream = new MemoryStream(image);
-                var pngImage = Image.FromStream(imageStream);
-                // Get the dimensions of the PNG image
-                int width = pngImage.Width;
-                int height = pngImage.Height;
-                results.Add(new XkcdComicDimensions
-                {
-                    Id = comic.Id,
-                    Width = width,
-                    Height = height
-                });
+                continue;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Failed: comic.Id = {comic.Id}");
-                Console.WriteLine(e);
-                results.Add(new XkcdComicDimensions
-                {
-                    Id = comic.Id,
-                    Width = 0,
-                    Height = 0
-                });
-            }
+            
+            var image = comic.ImageUrl.GetBytesFromUrl();
+            using var imageStream = new MemoryStream(image);
+            var pngImage = Image.FromStream(imageStream);
+
+            if (pngImage.Width == 0)
+                throw new Exception("Width 0");
+            existingDimension.Width = pngImage.Width;
+            existingDimension.Height = pngImage.Height;
+            File.WriteAllText("xkcd-dimensions_updated.json", JsonSerializer.SerializeToString(existingDimensions));
         }
 
-        File.WriteAllText("xkcd-dimensions.json", JsonSerializer.SerializeToString(results));
+        File.WriteAllText("xkcd-dimensions_updated.json", JsonSerializer.SerializeToString(existingDimensions));
     }
 }
 

@@ -27,9 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="static_data\xkcd-dimensions.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Remove="static_data\xkcd-metadata.jsonl" />
     <Content Include="static_data\xkcd-metadata.jsonl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
