@@ -26,7 +26,11 @@ public static class ConfigureDbXkcd
 
         foreach (var comic in comics)
         {
-            var dimension = dimensions.First(x => x.Id == comic.Id);
+            var dimension = dimensions.FirstOrDefault(x => x?.Id == comic.Id);
+            if (dimension == null)
+            {
+                continue;
+            }
             comic.Width = dimension.Width;
             comic.Height = dimension.Height;
         }
