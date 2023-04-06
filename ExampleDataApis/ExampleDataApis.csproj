@@ -27,14 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="static_data\xkcd-dimensions.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Remove="static_data\xkcd-metadata.jsonl" />
     <Content Include="static_data\xkcd-metadata.jsonl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Remove="static_data\xkcd-dimensions.json" />
-    <Content Include="static_data\xkcd-dimensions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
 </Project>
