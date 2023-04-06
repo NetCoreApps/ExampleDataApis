@@ -67,15 +67,11 @@ public class UnitTest
                     Width = width,
                     Height = height
                 });
-                // Dispose the image to release resources
-                pngImage.Dispose();
             }
             catch (Exception e)
             {
+                Console.WriteLine($"Failed: comic.Id = {comic.Id}");
                 Console.WriteLine(e);
-            }
-            finally
-            {
                 results.Add(new XkcdComicDimensions
                 {
                     Id = comic.Id,
