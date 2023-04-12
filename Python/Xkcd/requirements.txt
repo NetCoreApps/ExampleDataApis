@@ -1,0 +1,4 @@
+aiohttp~=3.8.4
+pandas~=2.0.0
+aiolimiter~=1.0.0
+beautifulsoup4~=4.12.2
