@@ -14,7 +14,7 @@ public class AppHost : AppHostBase, IHostingStartup
             // Configure ASP.NET Core IOC Dependencies
         });
 
-    public AppHost() : base("ExampleDataApis", typeof(MyServices).Assembly) {}
+    public AppHost() : base("SSG Examples", typeof(MyServices).Assembly) {}
 
     public override void Configure(Container container)
     {
