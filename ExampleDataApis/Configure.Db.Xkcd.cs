@@ -12,10 +12,11 @@ public static class ConfigureDbXkcd
     {
         var allLines = "static_data/xkcd-metadata.jsonl"
             .ReadAllText().Split("\n");
-        using var jsonConfig = JsConfig.With(new Config
-        {
+        
+        using var jsonConfig = JsConfig.With(new Config {
             TextCase = TextCase.SnakeCase
         });
+        
         var comics = allLines
             .Where(x => !x.IsNullOrEmpty())
             .Select(JsonSerializer.DeserializeFromString<XkcdComic>)
@@ -27,15 +28,15 @@ public static class ConfigureDbXkcd
         foreach (var comic in comics)
         {
             var dimension = dimensions.FirstOrDefault(x => x?.Id == comic.Id);
-            if (dimension == null)
-            {
-                continue;
-            }
+            if (dimension == null) continue;
+            
             comic.Width = dimension.Width;
             comic.Height = dimension.Height;
         }
         
-        if(db.CreateTableIfNotExists<XkcdComic>())
+        if (db.CreateTableIfNotExists<XkcdComic>())
+        {
             db.InsertAll(comics);
+        }
     }
 }
